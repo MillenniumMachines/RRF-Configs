@@ -18,6 +18,7 @@ M552.1 S-1
 M552.1 S0
 
 echo { "Configuring WiFI Access Point - password is ""millenniummachines""." }
+
 ; Configure WiFi AP
 M589 S"Milo" P"millenniummachines" I192.168.40.1
 

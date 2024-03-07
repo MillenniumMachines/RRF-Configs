@@ -1,7 +1,9 @@
 ; homex.g - Lifts Z, then homes X using existing machine limits.
 
-; Relative positioning
+; Relative positioning in mm and mm/min
 G91
+G21
+G94
 
 ; Raise Z towards machine limit as it is already homed
 G53 G0 Z{move.axes[2].max}
