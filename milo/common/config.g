@@ -8,7 +8,7 @@ M98 P"general.g"
 ; proceeding.
 ; If your emergency stop kills all power to the mainboard
 ; and spindle, then you can safely leave this commented.
-; M98 P"estop.g"
+M98 P"estop.g"
 
 ; Continue with configuration.
 M98 P"movement.g"

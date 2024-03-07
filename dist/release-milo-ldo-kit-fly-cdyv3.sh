@@ -7,6 +7,8 @@ SD=$(dirname "$0")
 # Include common variables
 source ${SD}/release-common.env
 
+COMMON_DIR="milo/common"
+
 MACHINE_DIR="milo/ldo-kit-fly-cdyv3"
 MACHINE_NAME="${MACHINE_DIR//\//-}"
 
@@ -29,7 +31,10 @@ TMP_DIR=$(mktemp -d -t rrf-config-XXXXX)
 # Make stub folder-structure
 mkdir -p "${TMP_DIR}/${SYS_DIR}" "${TMP_DIR}/${WWW_DIR}" "${TMP_DIR}/${FIRMWARE_DIR}" "${TMP_DIR}/${MACRO_DIR}"
 
-# Copy config files to correct locations
+# Copy common config files to correct location
+${SYNC_CMD} "${WD}/${COMMON_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
+
+# Copy machine-specific config files to correct location
 ${SYNC_CMD} "${WD}/${MACHINE_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
 
 # Copy firmware files to correct location
