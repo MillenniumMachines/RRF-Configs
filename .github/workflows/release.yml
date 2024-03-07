@@ -1,0 +1,54 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: Build RRF Configs for Release
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release-${{ github.sha }}
+          release_name: RRF Configuration ${{ github.ref_name }}
+          body: ${{ github.event.head_commit.message }}
+          draft: true
+          prerelease: false
+  build:
+    name: Build configuration assets
+    needs: create_release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+    strategy:
+      matrix:
+        board:
+          - milo-ldo-kit-fly-cdyv3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build release asset
+        run: |
+          dist/release-${{ matrix.board }}.sh
+      - name: Upload Board Configuration
+        id: upload-board-zip
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.create_release.outputs.upload_url }}
+          asset_path: ./dist/${{ matrix.board }}-${{ github.ref_name }}.zip
+          asset_name: rrf-${{ matrix.board }}-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
