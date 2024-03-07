@@ -29,7 +29,7 @@ DWC_URL="${DUET_RELEASE_URL}/DuetWebControl-SD.zip"
 TMP_DIR=$(mktemp -d -t rrf-config-XXXXX)
 
 # Make stub folder-structure
-mkdir -p "${TMP_DIR}/${SYS_DIR}" "${TMP_DIR}/${WWW_DIR}" "${TMP_DIR}/${FIRMWARE_DIR}" "${TMP_DIR}/${MACRO_DIR}"
+mkdir -p "${TMP_DIR}/${SYS_DIR}" "${TMP_DIR}/${WWW_DIR}" "${TMP_DIR}/${FIRMWARE_DIR}" "${TMP_DIR}/${MACRO_DIR}" "${TMP_DIR}/${GCODE_DIR}"
 
 # Copy common config files to correct location
 ${SYNC_CMD} "${WD}/${COMMON_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
