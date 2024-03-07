@@ -1,0 +1,1 @@
+abort { "Machine-specific configuration does not contain a drives.g file!" }
