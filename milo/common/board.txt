@@ -1,0 +1,4 @@
+// board.txt file undefined!
+
+// Machine-specific configs must include a board.txt
+// file in their root directory, alongside config.g.

@@ -1,6 +1,6 @@
-; touchprobe.g - Configures an optional touch probe.
+; touchprobe.g - Configures a touch probe.
 
-; Not part of LDO kit, disabled by default.
+; Disabled by default.
 ; Configure the pin and uncomment to enable.
 
 ; P5       - Filtered Switch
