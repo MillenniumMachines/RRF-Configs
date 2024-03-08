@@ -28,6 +28,9 @@ if { !exists(param.S) || param.S < -1 || param.S > 2 }
 ; Get expected state
 var tS = { var.states[param.S+1] }
 
+if { network.interfaces[0].type != "wifi" }
+    abort { "WiFi module not found!" }
+
 ; While network is not in target state
 ; attempt to change mode using M552 and wait
 ; until the target state is reached. Retry
