@@ -8,14 +8,16 @@
 ; communications errors with the WiFi modules
 ; which are sometimes... less than reliable.
 
-; Switch WiFi adapter to idle mode
-M552.1 S0
-
 ; Enable WiFi adapter in AP mode
 ; Change this to S1 for client mode _after_
 ; configuring WiFi network details using M587
 ; to store the details in the WiFi module.
-M552.1 S2
+; NOTE: Do not use the 'M552.1' macro here -
+; the mainboard processes the wifi commands
+; asynchronously during boot, so the WiFi module
+; will not start up until the boot process is
+; complete.
+M552 S2
 
 ; Enable HTTP, disable FTP and Telnet
 M586 P0 S1
