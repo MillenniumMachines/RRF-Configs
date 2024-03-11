@@ -8,6 +8,15 @@
 ; If using this macro to switch between client and AP mode, you
 ; must switch to idle mode first (S0).
 
+; WARNING: Do not call this directly from config.g or a macro run
+; from config.g, as it will cause a boot loop - config.g sets up
+; asynchronously, and the WiFi adapter comes up after the
+; configuration process is complete. This macro is intended to be
+; used during complex network configuration setups, such as when we
+; need to update the WiFi module and need to know the module is in
+; a particular state before we can proceed.
+
+
 ; List of expected modes when passed an S-number.
 ; First one corresponds to S=-1, second to S=0, etc.
 
