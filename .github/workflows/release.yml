@@ -25,23 +25,26 @@ jobs:
           body: ${{ github.event.head_commit.message }}
           draft: true
           prerelease: false
-  build:
-    name: Build configuration assets
+  build-milo-v1_5:
+    name: Build configuration assets for Milo V1.5
     needs: create_release
     runs-on: ubuntu-latest
+    env:
+      machine: milo-v1.5
     permissions:
       contents: 'write'
       id-token: 'write'
     strategy:
       matrix:
         board:
-          - milo-ldo-kit-fly-cdyv3
+          - ldo-kit-fly-cdyv3
+          - reference-fly-cdyv3
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build release asset
         run: |
-          dist/release-${{ matrix.board }}.sh
+          dist/release.sh "${{env.machine}}" "${{ matrix.board }}"
       - name: Upload Board Configuration
         id: upload-board-zip
         uses: actions/upload-release-asset@v1
@@ -49,6 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./dist/${{ matrix.board }}-${{ github.ref_name }}.zip
-          asset_name: rrf-${{ matrix.board }}-${{ github.ref_name }}.zip
+          asset_path: ./dist/${{env.machine}}-${{ matrix.board }}-${{ github.ref_name }}.zip
+          asset_name: rrf-${{env.machine}}-${{ matrix.board }}-${{ github.ref_name }}.zip
           asset_content_type: application/zip
