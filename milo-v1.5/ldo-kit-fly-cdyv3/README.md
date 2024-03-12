@@ -2,7 +2,7 @@
 
 ## Intro
 
-Provided here is a known-good configuration for the hardware and software provided with the LDO kit for the Milo V1.5.
+Provided here is a known-good configuration for the hardware in the LDO kit for the Milo V1.5.
 
 Speeds, currents and functionality are configured based on the kit. To use, follow the instructions in the main [README.md](../../README.md) file.
 
