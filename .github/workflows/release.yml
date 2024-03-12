@@ -26,7 +26,7 @@ jobs:
           draft: true
           prerelease: false
   build-milo-v1_5:
-    name: Build configuration assets for Milo V1.5
+    name: Build configuration assets for Milo v1.5
     needs: create_release
     runs-on: ubuntu-latest
     env:
