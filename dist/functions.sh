@@ -29,6 +29,10 @@ function build_release() {
     # Copy machine-specific config files to correct location
     ${SYNC_CMD} "${WD}/${MACHINE_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
 
+    # Remove example files that have been overridden by the
+    # machine-specific config files.
+    find "${TMP_DIR}/${SYS_DIR}" -name '*.g' -print | xargs -n 1 bash -c '[[ -f "${0}.example" ]] && rm ${0}.example && echo "Removed overridden ${0}.example"'
+
     # Copy firmware files to correct location
     wget -O "${TMP_DIR}/${RRF_FIRMWARE_NAME}" "${RRF_FIRMWARE_URL}"
     wget -O "${TMP_DIR}/${FIRMWARE_DIR}/${WIFI_FIRMWARE_NAME}" "${WIFI_FIRMWARE_URL}"
