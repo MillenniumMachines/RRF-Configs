@@ -14,7 +14,11 @@ M98 P"speed.g"
 M98 P"limits.g"
 M98 P"fans.g"
 M98 P"spindle.g"
-M98 P"network.g"
+
+if { fileexists("network.g") }
+    M98 P"network.g"
+else
+    M98 P"network-default.g"
 
 ; Toolsetter and touch probe are optional,
 ; and will only be loaded if the files exist.
