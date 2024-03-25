@@ -40,13 +40,16 @@ var isWifi = { network.interfaces[var.iface].type == "wifi" }
 
 var ifaceType = { var.isWifi ? "WiFi" : "LAN" }
 
-; Validate S parameter based on interface type.
-; NOTE: S=-1 and S=2 are not valid for Ethernet interfaces.
-if { !exists(param.S) || var.stateID < 0 || (var.isWifi && var.stateID >= #var.wStates) || (!var.isWifi && var.stateID >= #var.eStates) }
+if { !exists(param.S) }
     abort {"Must provide valid target mode number with S parameter!"}
 
 ; Target state index
 var stateID = { var.isWifi ? param.S+1 : param.S }
+
+; Validate S parameter based on interface type.
+; NOTE: S=-1 and S=2 are not valid for Ethernet interfaces.
+if { var.stateID < 0 || (var.isWifi && var.stateID >= #var.wStates) || (!var.isWifi && var.stateID >= #var.eStates) }
+    abort {"Must provide valid target mode number with S parameter!"}
 
 ; Get expected state based on interface type.
 ; Ethernet does not have a -1 state so we don't
