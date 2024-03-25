@@ -1,0 +1,23 @@
+; network.g - Configure network settings
+
+; === USAGE ===
+; This is an example file, used to override the default
+; network behaviour. To use this file, edit it following
+; the instructions below, remove ".example" from the end
+; of the filename, and restart your mainboard.
+; === USAGE ===
+
+; This file will be loaded instead of network-default.g
+; if it exists.
+
+; Enable WiFi adapter in Client mode
+M552 S1
+
+; Please see the documentation for M553, M554 and M586
+; in the RRF Gcodes documentation:
+; https://docs.duet3d.com/User_manual/Reference/Gcodes
+
+; Enable HTTP, disable FTP and Telnet
+M586 P0 S1
+M586 P1 S0
+M586 P2 S0
