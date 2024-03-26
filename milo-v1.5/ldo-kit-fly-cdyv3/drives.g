@@ -25,7 +25,7 @@ M350 X32 Y32 Z32
 M92 X800 Y800 Z1600
 
 ; Set motor currents (mA)
-M906 X1200 Y1200 Z1200
+M906 X1800 Y1800 Z1200
 
 ; Set standstill current reduction to 10%
 M917 X10 Y10 Z10
