@@ -34,8 +34,11 @@ function build_release() {
     find "${TMP_DIR}/${SYS_DIR}" -name '*.g' -print | xargs -n 1 bash -c '[[ -f "${0}.example" ]] && rm ${0}.example && echo "Removed overridden ${0}.example"'
 
     # Copy firmware files to correct location
-    wget -O "${TMP_DIR}/${RRF_FIRMWARE_NAME}" "${RRF_FIRMWARE_URL}"
-    wget -O "${TMP_DIR}/${FIRMWARE_DIR}/${WIFI_FIRMWARE_NAME}" "${WIFI_FIRMWARE_URL}"
+    wget -O "${TMP_DIR}/${RRF_FIRMWARE_DST_1_NAME}" "${RRF_FIRMWARE_URL}"
+    wget -O "${TMP_DIR}/${FIRMWARE_DIR}/${WIFI_FIRMWARE_DST_NAME}" "${WIFI_FIRMWARE_URL}"
+
+    # Copy RRF firmware to filename required for first boot flash.
+    cp "${TMP_DIR}/${RRF_FIRMWARE_DST_1_NAME}" "${TMP_DIR}/${RRF_FIRMWARE_DST_2_NAME}"
 
     # Extract DWC files to correct location
     wget -O "${TMP_DIR}/dwc.zip" "${DWC_URL}"
