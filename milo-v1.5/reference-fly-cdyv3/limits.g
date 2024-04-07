@@ -15,7 +15,7 @@ M208 X335 Y208 Z0 S0
 ; position is MAX.
 ; Z homes upwards to zero.
 
-; Endstop X=0: NC
+; Endstop X=MIN: NC
 M574 X1 S1 P"PC_7"
 
 ; Endstop Y=MAX: NC

@@ -3,9 +3,6 @@
 ; Disable WiFi adapter
 M552.1 S-1
 
-; Switch WiFi adapter to idle mode
-M552.1 S0
-
 echo { "Updating WiFi firmware..." }
 
 ; Update the WiFi firmware

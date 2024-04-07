@@ -15,6 +15,10 @@ function build_release() {
 
     MACHINE_NAME="${MACHINE_DIR//\//-}"
 
+    ZIP_PATH="${DIST_DIR}/${MACHINE_NAME}-${COMMIT_ID}.zip"
+
+    [[ -f "${ZIP_PATH}" ]] && rm "${ZIP_PATH}"
+
     echo "Building release ${COMMIT_ID} for ${MACHINE_NAME}..."
 
     # Create temporary directory
@@ -47,7 +51,7 @@ function build_release() {
 
     # Create release zip
     cd "${TMP_DIR}"
-    zip -r "${DIST_DIR}/${MACHINE_NAME}-${COMMIT_ID}.zip" *
+    zip -r "${ZIP_PATH}" *
     cd "${WD}"
     rm -rf "${TMP_DIR}"
 }
