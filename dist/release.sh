@@ -19,6 +19,20 @@ MACHINE_ID="${2}"
     exit 1
 }
 
+MACHINE_ID_ENV="${SD}/../${MACHINE_TYPE}/${MACHINE_ID}/build.env"
+
+[[ -f "${MACHINE_ID_ENV}" ]] && {
+    echo "Machine build env found: ${MACHINE_ID}";
+    source ${MACHINE_ID_ENV};
+}
+
+BOARD_TYPE_ENV="${SD}/release-${RRF_BOARD_TYPE}.env"
+
+[[ -f "${BOARD_TYPE_ENV}" ]] && {
+    echo "Board build env found: ${RRF_BOARD_TYPE}"
+    source ${BOARD_TYPE_ENV}
+}
+
 MACHINE_ENV="${SD}/release-${MACHINE_TYPE}.env"
 
 [[ ! -f "${MACHINE_ENV}" ]] && {
