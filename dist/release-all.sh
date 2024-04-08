@@ -28,9 +28,6 @@ build_release
 load_release "milo-v1.5" "reference-fly-cdyv3"
 build_release
 
-load_release "milo-v1.5" "reference-skr3-ez-5160"
-build_release
-
 cat <<-EOF >>"${RNOTES_PATH}"
 	# Upgrading
 	* You can upload any of these release zip files from Duet Web Control (DWC), via the "Files -> System" link in the menu.
