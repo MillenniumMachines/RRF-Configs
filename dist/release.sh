@@ -19,32 +19,11 @@ MACHINE_ID="${2}"
     exit 1
 }
 
-MACHINE_ID_ENV="${SD}/../${MACHINE_TYPE}/${MACHINE_ID}/build.env"
-
-[[ -f "${MACHINE_ID_ENV}" ]] && {
-    echo "Machine build env found: ${MACHINE_ID}";
-    source ${MACHINE_ID_ENV};
-}
-
-BOARD_TYPE_ENV="${SD}/release-${RRF_BOARD_TYPE}.env"
-
-[[ -f "${BOARD_TYPE_ENV}" ]] && {
-    echo "Board build env found: ${RRF_BOARD_TYPE}"
-    source ${BOARD_TYPE_ENV}
-}
-
-MACHINE_ENV="${SD}/release-${MACHINE_TYPE}.env"
-
-[[ ! -f "${MACHINE_ENV}" ]] && {
-    echo "Machine type not found: ${MACHINE_TYPE}"
-    exit 1
-}
-
-# Include machine-specific variables
-source ${MACHINE_ENV}
-
 # Source build function
 source ${SD}/functions.sh
 
 # Build the release package for this machine
 build_release "${MACHINE_TYPE}" "${MACHINE_ID}"
+
+# No release notes for individual releases
+rm -f "${RNOTES_PATH}"

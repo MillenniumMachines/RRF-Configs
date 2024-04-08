@@ -5,53 +5,34 @@ on:
 
 name: Build RRF Configs for Release
 jobs:
-  create_release:
-    name: Create Release
+  build-configs:
+    name: Build configuration assets
     runs-on: ubuntu-latest
     permissions:
       contents: 'write'
       id-token: 'write'
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: release-${{ github.sha }}
-          release_name: RRF Configuration ${{ github.ref_name }}
-          body: ${{ github.event.head_commit.message }}
-          draft: true
-          prerelease: false
-  build-milo-v1_5:
-    name: Build configuration assets for Milo v1.5
-    needs: create_release
-    runs-on: ubuntu-latest
-    env:
-      machine: milo-v1.5
-    permissions:
-      contents: 'write'
-      id-token: 'write'
-    strategy:
-      matrix:
-        board:
-          - ldo-kit-fly-cdyv3
-          - reference-fly-cdyv3
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Build release asset
+        uses: actions/checkout@v4
+      - name: Build all machine configurations
         run: |
-          dist/release.sh "${{env.machine}}" "${{ matrix.board }}"
-      - name: Upload Board Configuration
-        id: upload-board-zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          dist/release-all.sh
+
+  create_release:
+    name: Create Release
+    needs:
+      - build-configs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+    steps:
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./dist/${{env.machine}}-${{ matrix.board }}-${{ github.ref_name }}.zip
-          asset_name: rrf-${{env.machine}}-${{ matrix.board }}-${{ github.ref_name }}.zip
-          asset_content_type: application/zip
+          draft: true
+          generate_release_notes: true
+          body_path: dist/RELEASE_NOTES.md
+          fail_on_unmatched_files: true
+          files: |
+            dist/*.zip
