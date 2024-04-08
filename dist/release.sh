@@ -10,13 +10,13 @@ MACHINE_TYPE="${1}"
 MACHINE_ID="${2}"
 
 [[ -z "${MACHINE_ID}" ]] && {
-    echo "Usage: $0 <machine-type> <machine-id>"
-    exit 1
+	echo "Usage: $0 <machine-type> <machine-id>"
+	exit 1
 }
 
 [[ -z "${MACHINE_TYPE}" ]] && {
-    echo "Usage: $0 <machine-type> <machine-id>"
-    exit 1
+	echo "Usage: $0 <machine-type> <machine-id>"
+	exit 1
 }
 
 # Source build function
