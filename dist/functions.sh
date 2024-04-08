@@ -6,19 +6,25 @@ function make_cache_dir() {
 	}
 }
 
-function build_release() {
+function clean_cache_dir() {
+	[[ -d "${CACHE_DIR}" ]] && {
+		rm -rf "${CACHE_DIR}"
+	}
+}
+
+function load_release() {
 	MACHINE_TYPE="${1}"
 	MACHINE_ID="${2}"
 
-	make_cache_dir
-
 	[[ -z "${MACHINE_ID}" ]] && {
 		echo "Usage: $0 <machine-type> <machine-id>"
+		clean_cache_dir
 		exit 1
 	}
 
 	[[ -z "${MACHINE_TYPE}" ]] && {
 		echo "Usage: $0 <machine-type> <machine-id>"
+		clean_cache_dir
 		exit 1
 	}
 
@@ -33,6 +39,7 @@ function build_release() {
 
 	[[ ! -f "${MACHINE_ENV}" ]] && {
 		echo "Machine type not found: ${MACHINE_TYPE}"
+		clean_cache_dir
 		exit 1
 	}
 
@@ -52,12 +59,16 @@ function build_release() {
 	# Abort if machine dir does not exist
 	[[ ! -d "${WD}/${MACHINE_DIR}" ]] && {
 		echo "Machine directory not found: ${MACHINE_DIR}"
+		clean_cache_dir
 		exit 1
 	}
 
 	MACHINE_NAME="${MACHINE_DIR//\//-}"
 
 	ZIP_PATH="${DIST_DIR}/rrf-${MACHINE_NAME}-${COMMIT_ID}"
+}
+
+function build_release() {
 
 	[[ -f "${ZIP_PATH}" ]] && rm "${ZIP_PATH}"
 
@@ -106,16 +117,18 @@ function build_release() {
 	# Extract DWC files to correct location
 	unzip -o -q "${CACHE_DIR}/${DWC_DST_NAME}" -d "${TMP_DIR}/${WWW_DIR}"
 
-	cat <<-EOF >>"${RNOTES_PATH}"
-	## ${MACHINE_ID^^}
-	* **RepRapFirmware**: [${RRF_FIRMWARE_SRC_NAME}](${RRF_FIRMWARE_URL})
-	* **DuetWiFiServer**: [${WIFI_FIRMWARE_SRC_NAME}](${WIFI_FIRMWARE_URL})
-	* **DuetWebControl**: [${DWC_SRC_NAME}](${DWC_URL})
-	* **Optionally, MillenniumOS**: [${MOS_SRC_NAME}](${MOS_URL})
+	[[ ! -z "${ENABLE_RNOTES}" ]] && {
+		cat <<-EOF >>"${RNOTES_PATH}"
+		## ${MACHINE_ID^^}
+		* **RepRapFirmware**: [${RRF_FIRMWARE_SRC_NAME}](${RRF_FIRMWARE_URL})
+		* **DuetWiFiServer**: [${WIFI_FIRMWARE_SRC_NAME}](${WIFI_FIRMWARE_URL})
+		* **DuetWebControl**: [${DWC_SRC_NAME}](${DWC_URL})
+		* **Optionally, MillenniumOS**: [${MOS_SRC_NAME}](${MOS_URL})
 
-	---
+		---
 
-	EOF
+		EOF
+	}
 
 	# Create release zip with default files
 	cd "${TMP_DIR}"
