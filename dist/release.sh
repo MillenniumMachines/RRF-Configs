@@ -22,8 +22,13 @@ MACHINE_ID="${2}"
 # Source build function
 source ${SD}/functions.sh
 
+make_cache_dir
+
 # Build the release package for this machine
-build_release "${MACHINE_TYPE}" "${MACHINE_ID}"
+load_release "${MACHINE_TYPE}" "${MACHINE_ID}"
+build_release
 
 # No release notes for individual releases
 rm -f "${RNOTES_PATH}"
+
+clean_cache_dir

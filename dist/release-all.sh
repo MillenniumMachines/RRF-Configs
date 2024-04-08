@@ -13,13 +13,23 @@ source ${SD}/functions.sh
 # the same files for each release.
 make_cache_dir
 
-rm -f "${RNOTES_PATH}"
+ENABLE_RNOTES="aww yiss"
 
-echo "# Milo V1.5" >>"${RNOTES_PATH}"
+# Add release notes header
+rm -f "${RNOTES_PATH}"
+cat <<-EOF >>"${RNOTES_PATH}"
+	# Milo V1.5
+EOF
 
 # Build the release package for this machine
-build_release "milo-v1.5" "ldo-kit-fly-cdyv3"
-build_release "milo-v1.5" "reference-fly-cdyv3"
+load_release "milo-v1.5" "ldo-kit-fly-cdyv3"
+build_release
+
+load_release "milo-v1.5" "reference-fly-cdyv3"
+build_release
+
+load_release "milo-v1.5" "reference-skr3-ez-5160"
+build_release
 
 cat <<-EOF >>"${RNOTES_PATH}"
 	# Upgrading
@@ -30,7 +40,4 @@ cat <<-EOF >>"${RNOTES_PATH}"
 	* You may then reboot, and the machine will attempt to connect to your network again.
 EOF
 
-# delete cache directory
-[[ -d "${cache_dir}" ]] && {
-    rm -rf ${cache_dir}
-}
+clean_cache_dir
