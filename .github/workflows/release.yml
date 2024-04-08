@@ -5,8 +5,8 @@ on:
 
 name: Build RRF Configs for Release
 jobs:
-  build-configs:
-    name: Build configuration assets
+  build-and-release:
+    name: Build and Create Release
     runs-on: ubuntu-latest
     permissions:
       contents: 'write'
@@ -17,16 +17,6 @@ jobs:
       - name: Build all machine configurations
         run: |
           dist/release-all.sh
-
-  create_release:
-    name: Create Release
-    needs:
-      - build-configs
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'write'
-      id-token: 'write'
-    steps:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
