@@ -90,13 +90,10 @@ function build_release() {
 	# machine-specific config files.
 	find "${TMP_DIR}/${SYS_DIR}" -name '*.g' -print | xargs -n 1 bash -c '[[ -f "${0}.example" ]] && rm ${0}.example && echo "Removed overridden ${0}.example"'
 
+	# RRF STM32 is now released as a single Zip file
 	# Copy firmware files to correct location
-	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" "${RRF_FIRMWARE_URL}"
-	}
-
-	[[ ! -f "${CACHE_DIR}/${WIFI_FIRMWARE_SRC_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${WIFI_FIRMWARE_SRC_NAME}" "${WIFI_FIRMWARE_URL}"
+	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" ]] && {
+		wget -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}"
 	}
 
 	[[ ! -f "${CACHE_DIR}/${DWC_DST_NAME}" ]] && {
@@ -107,9 +104,12 @@ function build_release() {
 		wget -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}"
 	}
 
+	# Unzip RRF firmware to cache dir
+	unzip -o -q "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" -d "${CACHE_DIR}/"
+
 	# Copy RRF firmware to both filenames.
-	cp "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${RRF_FIRMWARE_DST_1_NAME}"
-	cp "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${RRF_FIRMWARE_DST_2_NAME}"
+	cp "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${RRF_FIRMWARE_DST_NAME}"
+	cp "${CACHE_DIR}/${RRF_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${FIRMWARE_DIR}"
 
 	# Copy WiFi firmware to correct location
 	cp "${CACHE_DIR}/${WIFI_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${FIRMWARE_DIR}/${WIFI_FIRMWARE_DST_NAME}"
@@ -119,11 +119,10 @@ function build_release() {
 
 	[[ ! -z "${ENABLE_RNOTES}" ]] && {
 		cat <<-EOF >>"${RNOTES_PATH}"
-		## ${MACHINE_ID^^}
-		* **RepRapFirmware**: [${RRF_FIRMWARE_SRC_NAME}](${RRF_FIRMWARE_URL})
-		* **DuetWiFiServer**: [${WIFI_FIRMWARE_SRC_NAME}](${WIFI_FIRMWARE_URL})
-		* **DuetWebControl**: [${DWC_SRC_NAME}](${DWC_URL})
-		* **Optionally, MillenniumOS**: [${MOS_SRC_NAME}](${MOS_URL})
+		### ${MACHINE_ID^^}
+		* **RepRapFirmware / DuetWifiServer**: ${RRF_FIRMWARE_SRC_NAME} - ${RRF_FIRMWARE_URL}
+		* **DuetWebControl**: ${DWC_SRC_NAME} - ${DWC_URL}
+		* **Optionally, MillenniumOS**: ${MOS_SRC_NAME} - ${MOS_URL}
 
 		---
 
