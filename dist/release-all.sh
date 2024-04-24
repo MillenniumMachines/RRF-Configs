@@ -20,7 +20,7 @@ rm -f "${RNOTES_PATH}"
 cat <<-EOF >>"${RNOTES_PATH}"
 	# Release ${COMMIT_ID}
 
-	## Milo V1.5 - Release Contents
+	## Milo V1.5
 
 EOF
 
