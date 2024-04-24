@@ -120,9 +120,11 @@ function build_release() {
 	[[ ! -z "${ENABLE_RNOTES}" ]] && {
 		cat <<-EOF >>"${RNOTES_PATH}"
 		### ${MACHINE_ID^^}
-		* **RepRapFirmware / DuetWifiServer**: ${RRF_FIRMWARE_SRC_NAME} - ${RRF_FIRMWARE_URL}
-		* **DuetWebControl**: ${DWC_SRC_NAME} - ${DWC_URL}
-		* **Optionally, MillenniumOS**: ${MOS_SRC_NAME} - ${MOS_URL}
+
+		* **RepRapFirmware / DuetWifiServer**: \`${RRF_FIRMWARE_SRC_NAME}\` - ${TG_RELEASE}
+		* **DuetWebControl**: \`${DWC_SRC_NAME}\` - ${DUET_RELEASE}
+		* **Configuration**: \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` - ${COMMIT_ID}
+		* **Optionally, MillenniumOS**: \`${MOS_SRC_NAME}\` - ${MOS_RELEASE}
 
 		---
 
