@@ -1,0 +1,26 @@
+// Config for BTT SKR3-EZ H723
+board = biquskr_3_ez_h723
+
+// LED blinks to indicate Platform is spinning or other diagnostic.
+leds.diagnostic = A.13
+
+// Disable thermistors
+heat.tempSensePins = {}
+
+// WiFi Pins
+8266wifi.espDataReadyPin = B.10
+8266wifi.TfrReadyPin = B.11
+8266wifi.espResetPin = C.14
+
+// ESP32 RX/TX Settings
+8266wifi.serialRxTxPins = { D.9, D.8 }
+serial.aux.rxTxPins = { NoPin, NoPin }
+
+// TMC Smart Drivers
+stepper.numSmartDrivers = 3
+
+//TMC 5160 Drivers
+stepper.num5160Drivers = 3
+stepper.spiChannel = 3
+
+SPI3.pins = { E.14, E.15, E.13 }
