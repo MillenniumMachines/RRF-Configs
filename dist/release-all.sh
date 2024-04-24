@@ -18,7 +18,9 @@ ENABLE_RNOTES="aww yiss"
 # Add release notes header
 rm -f "${RNOTES_PATH}"
 cat <<-EOF >>"${RNOTES_PATH}"
-	# Milo V1.5
+	# Release ${COMMIT_ID}
+
+	## Milo V1.5 - Release Contents
 EOF
 
 # Build the release package for this machine
@@ -29,7 +31,7 @@ load_release "milo-v1.5" "reference-fly-cdyv3"
 build_release
 
 cat <<-EOF >>"${RNOTES_PATH}"
-	# Upgrading
+	## Upgrading
 	* You can upload any of these release zip files from Duet Web Control (DWC), via the "Files -> System" link in the menu.
 	* **NOTE**: If you upload the file via DWC and click 'Yes' to upgrade, the WiFi module will be flashed twice. There is currently no way around this, we need to do this to support extracting the file directly to the SD card for initial installations.
 	* The first time your machine reboots after installing the new release, it will switch back into Access Point mode and will _not_ connect to your WiFi network if it was configured to do so - this is because WiFi network details might be wiped when the WiFi module is updated, and bringing the board back up in AP mode allows recovery without having to connect over USB.
