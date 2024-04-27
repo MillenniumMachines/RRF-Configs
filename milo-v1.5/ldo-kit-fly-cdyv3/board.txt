@@ -1,13 +1,6 @@
-// Config for Fly-CDYv3
-board = fly_cdyv3
+// Stepper Driver Type
+//                    X        Y        Z        E1    E2
+stepper.DriverType = {tmc2209, tmc2209, tmc2209, none, none}
 
-// WiFi pins
-8266wifi.espDataReadyPin = PE_10
-8266wifi.TfrReadyPin = PE_12
-8266wifi.espResetPin = PE_11
-
-// ESP32 RX/TX Settings
-8266wifi.serialRxTxPins = { PD_9, PD_8 }
-
-// Temp pins
-heat.tempSensePins = { PB_1, PA_3, PC_4, PD_14 }
+// Disable thermistors
+heat.tempSensePins = {}
