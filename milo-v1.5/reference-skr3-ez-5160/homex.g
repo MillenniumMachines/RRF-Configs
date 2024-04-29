@@ -11,6 +11,10 @@ G53 G0 Z{move.axes[2].max}
 ; Move quickly to X axis endstop and stop there (first pass)
 G53 G1 H1 X{-(move.axes[0].max - move.axes[0].min + 5) } F{3600}
 
+; Endstop should now be triggered, verify
+if { ! sensors.endstops[0].triggered }
+    abort {"X endstop not triggered after full axis travel. Check that your X motor is connected and the endstop is working!"}
+
 ; Move away from X endstop
 G53 G1 H2 X{5}
 
