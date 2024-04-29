@@ -15,6 +15,10 @@ if { state.currentTool != -1 }
 ; Raise Z towards endstop at high speed
 G53 G1 H1 Z{move.axes[2].max - move.axes[2].min + 5} F{2000}
 
+; Endstop should now be triggered, verify
+if { ! sensors.endstops[2].triggered }
+    abort {"Z endstop not triggered after full axis travel. Check that your Z motor is connected and the endstop is working!"}
+
 ; Move away from Z endstop
 G53 G1 H2 Z{-5}
 
