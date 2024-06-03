@@ -27,6 +27,10 @@ if { fileexists("toolsetter.g") }
 if { fileexists("touchprobe.g") }
     M98 P"touchprobe.g"
 
+; Load a user configuration file if it exists
+if { fileexists("user-config.g") }
+    M98 P"user-config.g"
+
 ; Load MillenniumOS if it has been installed.
 if { fileexists("mos.g") }
     M98 P"mos.g"
