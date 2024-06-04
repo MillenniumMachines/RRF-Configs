@@ -93,15 +93,17 @@ function build_release() {
 	# RRF STM32 is now released as a single Zip file
 	# Copy firmware files to correct location
 	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}"
+		wget -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}" || { echo "Failed to download ${RRF_FIRMWARE_URL}"; exit 1; }
 	}
 
 	[[ ! -f "${CACHE_DIR}/${DWC_DST_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${DWC_DST_NAME}" "${DWC_URL}"
+		wget -O "${CACHE_DIR}/${DWC_DST_NAME}" "${DWC_URL}" || { echo "Failed to download ${DWC_URL}"; exit 1; }
+
 	}
 
 	[[ ! -f "${CACHE_DIR}/${MOS_DST_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}"
+		wget -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}" || { echo "Failed to download ${MOS_URL}"; exit 1; }
+
 	}
 
 	# Unzip RRF firmware to cache dir
