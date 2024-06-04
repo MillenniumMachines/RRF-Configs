@@ -93,16 +93,16 @@ function build_release() {
 	# RRF STM32 is now released as a single Zip file
 	# Copy firmware files to correct location
 	[[ ! -f "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}" || { echo "Failed to download ${RRF_FIRMWARE_URL}"; exit 1; }
+		wget -nv -O "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" "${RRF_FIRMWARE_URL}" || { echo "Failed to download ${RRF_FIRMWARE_URL}"; exit 1; }
 	}
 
 	[[ ! -f "${CACHE_DIR}/${DWC_DST_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${DWC_DST_NAME}" "${DWC_URL}" || { echo "Failed to download ${DWC_URL}"; exit 1; }
+		wget -nv -O "${CACHE_DIR}/${DWC_DST_NAME}" "${DWC_URL}" || { echo "Failed to download ${DWC_URL}"; exit 1; }
 
 	}
 
 	[[ ! -f "${CACHE_DIR}/${MOS_DST_NAME}" ]] && {
-		wget -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}" || { echo "Failed to download ${MOS_URL}"; exit 1; }
+		wget -nv -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}" || { echo "Failed to download ${MOS_URL}"; exit 1; }
 
 	}
 
@@ -144,13 +144,13 @@ function build_release() {
 
 	# Create release zip with default files
 	cd "${TMP_DIR}"
-	zip -r "${ZIP_PATH}.zip" *
+	zip -qr "${ZIP_PATH}.zip" *
 	cd "${WD}"
 
 	unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
 
 	cd "${TMP_DIR}"
-	zip -r "${ZIP_PATH}-with-mos.zip" *
+	zip -qr "${ZIP_PATH}-with-mos.zip" *
 	cd "${WD}"
 
 	rm -rf "${TMP_DIR}"
