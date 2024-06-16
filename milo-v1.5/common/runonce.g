@@ -9,7 +9,7 @@ echo { "Updating WiFi firmware..." }
 M997 S1
 
 ; If update failed, retry up to 10 times with a max delay of 10 seconds
-while { result != 0 || iterations < 10 }
+while { result != 0 && iterations < 10 }
     echo { "Failed to update WiFi firmware. Retrying after a short random delay..." }
     G4 P{ 1000 + random(9000) }
     M997 S1
