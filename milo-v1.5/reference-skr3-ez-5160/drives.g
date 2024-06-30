@@ -7,7 +7,7 @@ M569 P0 S1
 M569 P1 S1
 
 ; Physical drive 2 (Z) goes forwards using default driver timings
-M569 P1 S1
+M569 P2 S1
 
 
 ; Set non-standard sense resistors for the BTT 5160 drivers
