@@ -116,6 +116,9 @@ function build_release() {
 	# Copy WiFi firmware to correct location
 	cp "${CACHE_DIR}/${WIFI_FIRMWARE_SRC_NAME}" "${TMP_DIR}/${FIRMWARE_DIR}/${WIFI_FIRMWARE_DST_NAME}"
 
+	# Replace WiFi firmware type variable.
+	sed -si -e "s/%%WIFI_FIRMWARE_TYPE%%/${WIFI_FIRMWARE_DST_NAME}/g" ${TMP_DIR}/${SYS_DIR}/*.g
+
 	# Extract DWC files to correct location
 	unzip -o -q "${CACHE_DIR}/${DWC_DST_NAME}" -d "${TMP_DIR}/${WWW_DIR}"
 
