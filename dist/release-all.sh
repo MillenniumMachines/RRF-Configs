@@ -34,6 +34,9 @@ cat <<-EOF >>"${RNOTES_PATH}"
 EOF
 
 # Build the release package for this machine
+load_release "milo-v1.5" "ldo-kit-scylla-v1.0"
+build_release
+
 load_release "milo-v1.5" "ldo-kit-fly-cdyv3"
 build_release
 
