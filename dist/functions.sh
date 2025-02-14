@@ -35,6 +35,17 @@ function load_release() {
 		source ${MACHINE_ID_ENV};
 	}
 
+	# A machine type can have a single base type that it extends.
+	# This is useful for machines that are very similar, but have
+	# a few differences.
+	BASE_DIR="${SD}/../${MACHINE_TYPE}/${BASE_TYPE}"
+
+	[[ -d "${BASE_DIR}" ]] && {
+		[[ -f "${BASE_ENV}" ]] && {
+			echo "Base build env found: ${BASE_TYPE}";
+		}
+	}
+
 	MACHINE_ENV="${SD}/release-${MACHINE_TYPE}.env"
 
 	[[ ! -f "${MACHINE_ENV}" ]] && {
@@ -82,6 +93,11 @@ function build_release() {
 
 	# Copy common config files to correct location
 	${SYNC_CMD} "${WD}/${COMMON_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
+
+	# Copy base config files to correct location
+	[[ ! -z "${BASE_DIR}" ]] && [[ -d "${BASE_DIR}" ]] && {
+		${SYNC_CMD} "${WD}/${BASE_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
+	}
 
 	# Copy machine-specific config files to correct location
 	${SYNC_CMD} "${WD}/${MACHINE_DIR}/" "${TMP_DIR}/${SYS_DIR}/"
