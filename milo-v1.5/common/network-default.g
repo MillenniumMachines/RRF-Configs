@@ -9,4 +9,3 @@ M552 S2
 ; Enable HTTP, disable FTP and Telnet
 M586 P0 S1
 M586 P1 S0
-M586 P2 S0
