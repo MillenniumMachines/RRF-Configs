@@ -1,3 +1,3 @@
 ; touchprobe.g - Configures an optional touch probe.
 ; NO Type
-M558 K0 P5 C"PE_15" H2 A3 S0.01 T2500 F600:150
+M558 K0 P5 C"PE_15" H5 A3 S0.01 T1200 F300:50
