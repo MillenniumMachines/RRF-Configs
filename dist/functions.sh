@@ -114,13 +114,11 @@ function build_release() {
 
 	[[ ! -f "${CACHE_DIR}/${DWC_DST_NAME}" ]] && {
 		wget -nv -O "${CACHE_DIR}/${DWC_DST_NAME}" "${DWC_URL}" || { echo "Failed to download ${DWC_URL}"; exit 1; }
-
 	}
 
-	[[ ! -f "${CACHE_DIR}/${MOS_DST_NAME}" ]] && {
-		wget -nv -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}" || { echo "Failed to download ${MOS_URL}"; exit 1; }
-
-	}
+	# [[ ! -f "${CACHE_DIR}/${MOS_DST_NAME}" ]] && {
+	# 	wget -nv -O "${CACHE_DIR}/${MOS_DST_NAME}" "${MOS_URL}" || { echo "Failed to download ${MOS_URL}"; exit 1; }
+	# }
 
 	# Unzip RRF firmware to cache dir
 	unzip -o -q "${CACHE_DIR}/${RRF_FIRMWARE_ZIP_NAME}" -d "${CACHE_DIR}/"
@@ -154,12 +152,13 @@ function build_release() {
 		| DuetWiFiServer           | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}   |
 		| DuetWebControl           | \`${DWC_SRC_NAME}\`                      | ${DUET_RELEASE} |
 		| Configuration            | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}    |
-		| Optionally, MillenniumOS | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}  |
 
 		---
 
 		EOF
 	}
+
+	# | Optionally, MillenniumOS | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}  |
 
 	# Create release zip with default files
 	cd "${TMP_DIR}"
