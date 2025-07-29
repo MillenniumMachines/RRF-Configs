@@ -166,11 +166,14 @@ function build_release() {
 	zip -qr "${ZIP_PATH}.zip" *
 	cd "${WD}"
 
-	unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
+	# TEMP: Do not include MillenniumOS in the release zip.
+	# MillenniumOS is now built as a UI plugin, and I have not
+	# yet worked out how to include it in an sd-card style zip.
+	# unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
 
-	cd "${TMP_DIR}"
-	zip -qr "${ZIP_PATH}-with-mos.zip" *
-	cd "${WD}"
+	# cd "${TMP_DIR}"
+	# zip -qr "${ZIP_PATH}-with-mos.zip" *
+	# cd "${WD}"
 
 	rm -rf "${TMP_DIR}"
 }
