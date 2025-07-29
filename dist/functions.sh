@@ -38,12 +38,9 @@ function load_release() {
 	# A machine type can have a single base type that it extends.
 	# This is useful for machines that are very similar, but have
 	# a few differences.
-	BASE_DIR="${SD}/../${MACHINE_TYPE}/${BASE_TYPE}"
-
-	[[ -d "${BASE_DIR}" ]] && {
-		[[ -f "${BASE_ENV}" ]] && {
-			echo "Base build env found: ${BASE_TYPE}";
-		}
+	[[ ! -z "${BASE_TYPE}" ]] && {
+		echo "Base build env found: ${BASE_TYPE}";
+		BASE_DIR="${SD}/../${MACHINE_TYPE}/${BASE_TYPE}"
 	}
 
 	MACHINE_ENV="${SD}/release-${MACHINE_TYPE}.env"
