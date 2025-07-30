@@ -263,27 +263,18 @@ function build_release() {
 		| DuetWiFiServer           | \`${WIFI_FIRMWARE_SRC_NAME}\`            | ${TG_RELEASE}   |
 		| DuetWebControl           | \`${DWC_SRC_NAME}\`                      | ${DUET_RELEASE} |
 		| Configuration            | \`${COMMON_DIR}\` and \`${MACHINE_DIR}\` | ${COMMIT_ID}    |
+		| MillenniumOS             | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}  |
 
 		---
 
 		EOF
 	}
 
-	# | Optionally, MillenniumOS | \`${MOS_SRC_NAME}\`                      | ${MOS_RELEASE}  |
-
-	# Create release zip with default files
+	# Create release zip with all files
 	cd "${TMP_DIR}"
 	zip -qr "${ZIP_PATH}.zip" *
 	cd "${WD}"
 
-	# TEMP: Do not include MillenniumOS in the release zip.
-	# MillenniumOS is now built as a UI plugin, and I have not
-	# yet worked out how to include it in an sd-card style zip.
-	# unzip -o -q "${CACHE_DIR}/${MOS_DST_NAME}" -d "${TMP_DIR}/"
-
-	# cd "${TMP_DIR}"
-	# zip -qr "${ZIP_PATH}-with-mos.zip" *
-	# cd "${WD}"
 
 	rm -rf "${TMP_DIR}"
 }

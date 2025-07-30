@@ -21,9 +21,7 @@ cat <<-EOF >>"${RNOTES_PATH}"
 	# Release ${COMMIT_ID}
 
 	## Upgrading
-	* :warning: MillenniumOS v0.5 onwards is now built as a UI plugin only. I have not yet worked out how to include it in an sd-card style zip.
-	* You will need to install the UI plugin separately, from the [MillenniumOS releases page](https://github.com/MillenniumMachines/MillenniumOS/releases)
-	* You can upload any of these release zip files from Duet Web Control (DWC), via the "Files -> System" link in the menu.
+	* You can upload any of these release zip files from Duet Web Control (DWC), via the "Files -> System" link in the menu. This will overwrite any changes you have made to the SD card outside of the user-config.g file, so please ensure you have a backup of any custom files you want to keep.
 	* **NOTE**: If you upload the file via DWC and click 'Yes' to upgrade, the WiFi module will be flashed twice. There is currently no way around this, we need to do this to support extracting the file directly to the SD card for initial installations.
 	* The first time your machine reboots after installing the new release, it will switch back into Access Point mode and will _not_ connect to your WiFi network if it was configured to do so - this is because WiFi network details might be wiped when the WiFi module is updated, and bringing the board back up in AP mode allows recovery without having to connect over USB.
 	* You can connect to the access point using the password in the [documentation](https://millenniummachines.github.io/docs/milo/manual/chapters/90_install_rrf/#accessing-duet-web-control), and check if your WiFi network details need to be re-added using [M587](https://millenniummachines.github.io/docs/milo/manual/chapters/90_install_rrf/#configure-your-wifi-network).
