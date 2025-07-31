@@ -220,7 +220,7 @@ function build_release() {
 
 	# Copy MillenniumOS 'sd' folder contents to SYS_DIR
 	if [[ -d "${MOS_TMP_DIR}/sd" ]]; then
-		${SYNC_CMD} "${MOS_TMP_DIR}/sd/" "${TMP_DIR}/${SYS_DIR}/"
+		${SYNC_CMD} "${MOS_TMP_DIR}/sd/" "${TMP_DIR}/"
 	fi
 
 	# Copy MillenniumOS 'dwc' folder contents to WWW_DIR
