@@ -30,6 +30,11 @@ function load_release() {
 
 	MACHINE_ID_ENV="${SD}/../${MACHINE_TYPE}/${MACHINE_ID}/build.env"
 
+	# Clear the previous machine's settings. release-all.sh builds every
+	# machine in one shell, and a build.env only sets what it needs, so
+	# without this e.g. BASE_TYPE from one machine leaks into the next.
+	unset BASE_TYPE BASE_DIR RRF_BOARD_TYPE WIFI_BOARD_TYPE BOARD_NOTES
+
 	[[ -f "${MACHINE_ID_ENV}" ]] && {
 		echo "Machine build env found: ${MACHINE_ID}";
 		source ${MACHINE_ID_ENV};
