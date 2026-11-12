@@ -8,8 +8,8 @@ G94
 ; Raise Z towards machine limit as it is already homed
 G53 G0 Z{move.axes[2].max}
 
-; Move quickly to Y axis endstop and stop there (first pass)
-; LJ8A3-2-Z/AY inductive sensor: first pass max 1000mm/min
+; Move quickly towards Y MAX endstop and stop there (first pass)
+; LJ8A3-2-Z/AY inductive sensor: first pass at most 1000mm/min (Milo V2 manual, p.105)
 G53 G1 H1 Y{ move.axes[1].max - move.axes[1].min + 5 } F{1000}
 
 ; Endstop should now be triggered, verify

@@ -15,6 +15,7 @@ M208 X348 Y210 Z0 S0
 ; position is MAX.
 ; Z homes upwards to zero.
 
+; If M119 shows an endstop as triggered while nothing is near it, remove the ! from its pin (for example LJ8A3-2-Z/AX sensors or a D2F microswitch on Y).
 ; Endstop X=MIN: LJ8A3-2-Z/AY inductive sensor (PNP, NC), UEB X-MIN connector (PD_11)
 M574 X1 S1 P"!PD_11"
 

@@ -15,7 +15,7 @@ if { state.currentTool != -1 }
     G10 L1 P{state.currentTool} Z0
 
 ; Raise Z towards endstop at high speed.
-; LJ8A3-2-Z/AY inductive sensor: first pass max 1000mm/min
+; LJ8A3-2-Z/AY inductive sensor: first pass at most 1000mm/min (Milo V2 manual, p.105)
 G53 G1 H1 Z{move.axes[2].max - move.axes[2].min + 5} F{1000}
 
 ; Endstop should now be triggered, verify

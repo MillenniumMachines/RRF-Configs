@@ -9,7 +9,7 @@ G94
 M98 P"homez.g"
 
 ; Move quickly towards X MAX and Y MIN (Y0) endstops and stop there (first pass)
-; LJ8A3-2-Z/AY inductive sensor: first pass max 1000mm/min
+; LJ8A3-2-Z/AY inductive sensor: first pass at most 1000mm/min (Milo V2 manual, p.105)
 G53 G1 H1 X{move.axes[0].max - move.axes[0].min + 5} Y{-(move.axes[1].max - move.axes[1].min + 5)} F{1000}
 
 ; Endstops should now be triggered, verify

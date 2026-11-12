@@ -33,11 +33,11 @@ M350 X32 Y32 Z32 I0
 M92 X800 Y800 Z800
 
 ; Set motor currents (mA)
-; 2800mA matches the 2.8A NEMA23 motors in the Milo 2.0 BOM.
+; 2800mA matches the 2.8A NEMA23 motors in the Milo/Miley 2.0 BOM.
 ; RRF's M906 value is the peak (not RMS) current.
 M906 X2800 Y2800 Z2800
 
-; Set standstill current reduction to 5%
+; Set standstill current to 10% of the motor current
 M917 X10 Y10 Z10
 
 ; Enable motor idle current reduction after 30 seconds
