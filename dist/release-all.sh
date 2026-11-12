@@ -59,4 +59,10 @@ build_release
 load_release "milo-v2.0" "milo-scylla-v1.0-48v"
 build_release
 
+load_release "milo-v2.0" "miley-scylla-v1.0-24v"
+build_release
+
+load_release "milo-v2.0" "miley-scylla-v1.0-48v"
+build_release
+
 clean_cache_dir
