@@ -48,4 +48,15 @@ build_release
 load_release "milo-v1.5" "reference-skr3-ez-5160"
 build_release
 
+cat <<-EOF >>"${RNOTES_PATH}"
+	## Milo V2.0
+
+EOF
+
+load_release "milo-v2.0" "milo-scylla-v1.0-24v"
+build_release
+
+load_release "milo-v2.0" "milo-scylla-v1.0-48v"
+build_release
+
 clean_cache_dir
