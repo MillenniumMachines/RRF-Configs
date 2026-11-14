@@ -1,0 +1,8 @@
+; trigger2.g - Safety Net emergency stop macro
+; Trigger an instant reboot using M999
+; The commented out lines are for a slightly less
+; aggressive stop, which will open the safety net
+; relay and then halt the machine, allowing the user
+; to debug any machine issues before triggering the
+; reboot themselves.
+M81 M112
