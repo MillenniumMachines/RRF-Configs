@@ -34,7 +34,7 @@
 ; Configure emergency stop input. You must set the C"..." parameter to
 ; the pin identifier where your emergency stop input is connected.
 ; On Milo 2.0 and Miley 2.0 this is the UEB E-stop input: the X-MAX connector
-; (PC6 to GND, per the UEB wiring PDF). The polarity is unconfirmed.
+; (PC6 to GND, per the UEB wiring PDF). Plain, not inverted.
 M950 J1 C"PC_6"
 
 ; Configure safety net output. You must set the C"..." parameter to
