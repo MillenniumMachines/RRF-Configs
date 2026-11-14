@@ -1,0 +1,3 @@
+; touchprobe.g - Configures an optional touch probe.
+; NO type: !PE_15. For an NC type, remove the ! (PE_15).
+M558 K0 P5 C"!PE_15" H5 A3 S0.01 T1200 F300:50
