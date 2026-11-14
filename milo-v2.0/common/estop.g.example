@@ -18,9 +18,9 @@
 ;   - Open the safety net relay using M81
 ;   - Run M112 to trigger a machine halt
 
-; On boot, the safety relay will be closed either by:
-;   - A user-defined M80 command closing the relay on every boot or
-;   - MillenniumOS, if installed, will prompt the operator to close the relay.
+; On boot, the safety relay stays open, so machine power is off.
+; MillenniumOS asks the operator to turn power on at every boot (M80.9).
+; Before MillenniumOS is configured, run M80.9 to turn power on.
 
 ; The relay that is controlled by the Safety Net configuration MUST interrupt
 ; the physical circuit that controls the contactor (with the emergency stop
