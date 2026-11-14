@@ -51,6 +51,8 @@ build_release
 cat <<-EOF >>"${RNOTES_PATH}"
 	## Milo V2.0
 
+	**Prerelease for testing.** These Milo 2.0 and Miley 2.0 configurations haven't been tested on every machine yet. If something doesn't work on your machine, or you'd change something, please [open an issue](https://github.com/MillenniumMachines/RRF-Configs/issues).
+
 EOF
 
 load_release "milo-v2.0" "milo-scylla-v1.0-24v"
